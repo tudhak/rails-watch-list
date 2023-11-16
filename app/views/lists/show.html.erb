@@ -1,0 +1,34 @@
+<div class="row m-3">
+  <div class="col-4">
+    <h1 class="mb-4"><%= @list.name %></h1>
+
+     <h3 class="mb-3">List of bookmarks</h3>
+
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="card mb-4">
+        <img class="card-img-top" src="<%= bookmark.movie.poster_url %>" alt="Poster url">
+        <div class="card-body border-bottom">
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Movie</strong>: <%= bookmark.movie.title %></li>
+            <li class="list-group-item"><strong>Overview</strong>: <%= bookmark.movie.overview %></li>
+            <li class="list-group-item"><strong>Rating</strong>: <%= bookmark.movie.rating %> / 10 </strong></li>
+            <li class="list-group-item"><strong>Comment</strong>: <%= bookmark.comment %> </strong></li>
+          </ul>
+        </div>
+        <%= link_to 'Delete', bookmark_path(bookmark), class:"btn btn-danger text-white",
+         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= link_to new_list_bookmark_path(@list), class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
+        <span><i class="fa-solid fa-plus"></i> Add a bookmark</span>
+      <% end %>
+    </div>
+
+    <%= link_to lists_path, class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
+      <span><i class="fa-solid fa-share"></i> Back to lists</span>
+    <% end %>
+
+  </div>
+</div>

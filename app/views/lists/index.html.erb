@@ -1,0 +1,14 @@
+<div class="row m-3">
+  <div class="col-6">
+    <h1 class="mb-4">All the lists</h1>
+    <ul class="list-group mb-5">
+      <% @lists.each do |list| %>
+        <li class="list-group-item"><%= link_to list.name, list_path(list), class:"text-decoration-none" %></li>
+      <% end %>
+    </ul>
+
+    <%= link_to new_list_path, class:"p-3 bg-light border rounded shadow-sm text-decoration-none" do %>
+    <span><i class="fa-solid fa-rotate-left"></i> Add a new list</span>
+    <% end %>
+  </div>
+</div>

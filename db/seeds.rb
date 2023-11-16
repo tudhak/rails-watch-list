@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Movie.destroy_all
+
+10.times do
+  Movie.create(title: Faker::Movie.title, overview: Faker::Movie.quote,
+               poster_url: Faker::Avatar.image, rating: rand(9.9))
+end
+
+puts "Seed successfully generated."

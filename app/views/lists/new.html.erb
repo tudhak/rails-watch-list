@@ -1,0 +1,15 @@
+<div class="row m-3">
+  <div class="col-6">
+
+    <h1 class="mb-3">Add a new list</h1>
+
+    <div class="mb-4">
+    <%= render 'form', list: @list %>
+    </div>
+
+    <%= link_to lists_path, class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
+      <span><i class="fa-solid fa-share"></i> Back to lists</span>
+    <% end %>
+
+  </div>
+</div>
