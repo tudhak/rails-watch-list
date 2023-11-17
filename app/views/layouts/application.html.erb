@@ -11,7 +11,18 @@
   </head>
 
   <body>
-  <nav class="inavbar-lewagon"></nav>
+  <nav class="navbar-lewagon">
+    <%= link_to lists_path, class:"p-3 bg-light border rounded shadow-sm text-decoration-none" do %>
+      <span><i class="fa-solid fa-bars"></i></i> My lists</span>
+    <% end %>
+
+    <h1 class="m-0"><strong>Moviiiiz</strong></h1>
+
+    <%= link_to new_list_path, class:"p-3 bg-light border rounded shadow-sm text-decoration-none" do %>
+      <span><i class="fa-solid fa-rotate-left"></i> Add a new list</span>
+    <% end %>
+
+  </nav>
     <%= yield %>
   </body>
 </html>

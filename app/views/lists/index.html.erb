@@ -1,14 +1,25 @@
-<div class="row m-3">
-  <div class="col-6">
-    <h1 class="mb-4">All the lists</h1>
-    <ul class="list-group mb-5">
-      <% @lists.each do |list| %>
-        <li class="list-group-item"><%= link_to list.name, list_path(list), class:"text-decoration-none" %></li>
-      <% end %>
-    </ul>
-
-    <%= link_to new_list_path, class:"p-3 bg-light border rounded shadow-sm text-decoration-none" do %>
-    <span><i class="fa-solid fa-rotate-left"></i> Add a new list</span>
-    <% end %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1595769816263-9b910be24d5f?q=80&w=2079&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h2>Save all your movies in one place.</h2>
   </div>
+</div>
+
+<div class="grid">
+  <% @lists.each do |list| %>
+    <% case list.name %>
+    <% when "Romance" then image = "https://images.unsplash.com/photo-1645389411992-e9ec49b158e6?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Thriller" then image = "https://images.unsplash.com/photo-1618425978222-3a0490ee522c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Action" then image = "https://images.unsplash.com/photo-1575919220112-0d5a2dc6a4b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Science-fiction" then image = "https://images.unsplash.com/photo-1533972751724-9135a8410a4c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Fantasy" then image = "https://images.unsplash.com/photo-1462759353907-b2ea5ebd72e7?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Classique" then image = "https://images.unsplash.com/photo-1611021809244-83074a8a42c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Jeunesse" then image = "https://images.unsplash.com/photo-1616097970275-1e187b4ce59f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Western" then image = "https://images.unsplash.com/photo-1547700094-a0b42d320937?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% else %>
+      <% image = "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% end %>
+   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image %>)">
+    <%= link_to list.name, list_path(list), class:"text-decoration-none text-white" %>
+  </div>
+  <% end %>
 </div>

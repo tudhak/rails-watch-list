@@ -7,11 +7,26 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require 'open-uri'
+
 Movie.destroy_all
 
-10.times do
-  Movie.create(title: Faker::Movie.title, overview: Faker::Movie.quote,
-               poster_url: Faker::Avatar.image, rating: rand(9.9))
+
+results = JSON.parse(URI.open('http://tmdb.lewagon.com/movie/top_rated').read)['results']
+
+results.each do |result|
+  Movie.create(
+    title: result['title'],
+    overview: result['overview'],
+    rating: result['vote_average'],
+    poster_url: "https://image.tmdb.org/t/p/w500#{result['backdrop_path']}"
+  )
 end
 
-puts "Seed successfully generated."
+# 10.times do
+  # Movie.create(title: Faker::Movie.title, overview: Faker::Movie.quote,
+  #              poster_url: Faker::Avatar.image, rating: rand(9.9))
+# end
+
+puts 'Seed successfully generated.'

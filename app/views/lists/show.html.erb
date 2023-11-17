@@ -1,34 +1,57 @@
-<div class="row m-3">
-  <div class="col-4">
-    <h1 class="mb-4"><%= @list.name %></h1>
+<% case @list.name %>
+    <% when "Romance" then image = "https://images.unsplash.com/photo-1645389411992-e9ec49b158e6?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Thriller" then image = "https://images.unsplash.com/photo-1618425978222-3a0490ee522c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Action" then image = "https://images.unsplash.com/photo-1575919220112-0d5a2dc6a4b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Science-fiction" then image = "https://images.unsplash.com/photo-1533972751724-9135a8410a4c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Fantasy" then image = "https://images.unsplash.com/photo-1462759353907-b2ea5ebd72e7?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Classique" then image = "https://images.unsplash.com/photo-1611021809244-83074a8a42c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Jeunesse" then image = "https://images.unsplash.com/photo-1616097970275-1e187b4ce59f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% when "Western" then image = "https://images.unsplash.com/photo-1547700094-a0b42d320937?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% else %>
+      <% image = "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+    <% end %>
 
-     <h3 class="mb-3">List of bookmarks</h3>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image %>);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+  <a href=# class="number text-decoration-none text-black">Number of movies: <%= @list.bookmarks.count %></a>
+</div>
 
-    <% @list.bookmarks.each do |bookmark| %>
-      <div class="card mb-4">
-        <img class="card-img-top" src="<%= bookmark.movie.poster_url %>" alt="Poster url">
-        <div class="card-body border-bottom">
-          <ul class="list-group">
-            <li class="list-group-item"><strong>Movie</strong>: <%= bookmark.movie.title %></li>
-            <li class="list-group-item"><strong>Overview</strong>: <%= bookmark.movie.overview %></li>
-            <li class="list-group-item"><strong>Rating</strong>: <%= bookmark.movie.rating %> / 10 </strong></li>
-            <li class="list-group-item"><strong>Comment</strong>: <%= bookmark.comment %> </strong></li>
-          </ul>
-        </div>
-        <%= link_to 'Delete', bookmark_path(bookmark), class:"btn btn-danger text-white",
-         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<div class="row justify-content-center mb-3">
+    <div class="col-6 p-3 rounded border shadow-sm">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to lists_path, class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
+          <span><i class="fa-solid fa-share"></i> Back to lists</span>
+        <% end %>
+        <h3 class="m-0">List of bookmarks</h3>
+        <%= link_to new_list_bookmark_path(@list), class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
+          <span><i class="fa-solid fa-plus"></i> Add a bookmark</span>
+        <% end %>
       </div>
-    <% end %>
-
-    <div class="mb-4">
-      <%= link_to new_list_bookmark_path(@list), class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
-        <span><i class="fa-solid fa-plus"></i> Add a bookmark</span>
-      <% end %>
     </div>
+  </div>
 
-    <%= link_to lists_path, class:"p-2 bg-light border rounded shadow-sm text-decoration-none" do %>
-      <span><i class="fa-solid fa-share"></i> Back to lists</span>
-    <% end %>
-
+<%# <div class="container"> %>
+<div class="row">
+  <div class="col-12">
+    <div class="grid">
+        <% @list.bookmarks.each do |bookmark| %>
+          <div class="card mb-4 border rounded shadow">
+            <img class="card-img-top" src="<%= bookmark.movie.poster_url %>" alt="Poster url">
+            <div class="card-body border-bottom">
+              <ul class="list-group">
+                <li class="list-group-item"><strong><%= bookmark.movie.title %></strong></li>
+                <li class="list-group-item text-secondary"><%= bookmark.movie.overview %></li>
+                <li class="list-group-item"><i class="fa-solid fa-star text-warning"></i> <%= bookmark.movie.rating %></li>
+                <li class="list-group-item"><i class="fa-solid fa-quote-left"></i> "<%= bookmark.comment %>"</li>
+              </ul>
+            </div>
+            <%= link_to 'Delete', bookmark_path(bookmark), class:"btn btn-danger text-white",
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          </div>
+        <% end %>
+    </div>
   </div>
 </div>
+<%# </div> %>
